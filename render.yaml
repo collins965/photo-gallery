@@ -1,0 +1,10 @@
+# render.yaml
+services:
+  - type: web
+    name: photo-gallery
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn photo_gallery_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: photo_gallery_project.settings
