@@ -14,7 +14,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load secret values from .env
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'photo-gallery-mnmp.onrender.com', 
+]
+
 
 
 # Application definition
