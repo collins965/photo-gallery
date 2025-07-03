@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full bg-gray-100 p-8 rounded-lg shadow-md">
+    <h2 class="text-center text-3xl font-extrabold text-gray-900 mb-6">Create an Account</h2>
+
+    <form method="POST" novalidate class="space-y-4">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        {{ form.username|add_class:"mt-1 block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 sm:text-sm" }}
+        {{ form.username.errors }}
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        {{ form.email|add_class:"mt-1 block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 sm:text-sm" }}
+        {{ form.email.errors }}
+      </div>
+
+      <div>
+        <label for="password1" class="block text-sm font-medium text-gray-700">Password</label>
+        {{ form.password1|add_class:"mt-1 block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 sm:text-sm" }}
+        {{ form.password1.errors }}
+      </div>
+
+      <div>
+        <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+        {{ form.password2|add_class:"mt-1 block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 sm:text-sm" }}
+        {{ form.password2.errors }}
+      </div>
+
+      <button type="submit"
+              class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        Register
+      </button>
+
+      <p class="mt-4 text-center text-sm text-gray-600">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Log in</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}

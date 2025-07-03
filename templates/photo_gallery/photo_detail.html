@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-8">
+  <h2 class="text-3xl font-bold mb-4">{{ photo.title }}</h2>
+  <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="w-full rounded-lg shadow-md mb-4">
+  <p class="text-lg text-gray-700">{{ photo.description }}</p>
+  <p class="text-sm text-gray-500 mt-2">Uploaded by @{{ photo.user.username }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load widget_tweaks %}  
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-xl mt-8">
+  <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">
+    {% if form.instance.pk %}  Edit Photo {% else %}  Upload New Photo {% endif %}
+  </h1>
+
+  <form method="POST" enctype="multipart/form-data" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <div>
+      <label for="id_title" class="block font-medium text-gray-700 mb-1"> Title</label>
+      {{ form.title|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label for="id_description" class="block font-medium text-gray-700 mb-1"> Description</label>
+      {{ form.description|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400" }}
+    </div>
+
+    <!-- Image Upload + Preview -->
+    <div>
+      <label for="id_image" class="block font-medium text-gray-700 mb-1"> Photo</label>
+      <input
+        id="id_image"
+        type="file"
+        name="image"
+        accept="image/*"
+        capture="environment"
+        class="block w-full text-sm border border-gray-300 rounded-md p-2"
+        onchange="previewImage(event)"
+      />
+      {% if form.instance.image %}
+        <img src="{{ form.instance.image.url }}" id="imagePreview" class="mt-4 rounded-lg w-full max-h-64 object-cover">
+      {% else %}
+        <img id="imagePreview" class="mt-4 rounded-lg w-full max-h-64 object-cover hidden">
+      {% endif %}
+    </div>
+
+    <!-- Tags -->
+    <div>
+      <label for="id_tags" class="block font-medium text-gray-700 mb-1"> Tags</label>
+      {{ form.tags|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400" }}
+      <p class="text-xs text-gray-500 mt-1">Separate tags with commas, e.g., "nature, sunset, travel"</p>
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center">
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition duration-200">
+        {% if form.instance.pk %}  Update Photo {% else %}  Upload Photo {% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Preview Script -->
+<script>
+  function previewImage(event) {
+    const reader = new FileReader();
+    const preview = document.getElementById('imagePreview');
+
+    reader.onload = function() {
+      preview.src = reader.result;
+      preview.classList.remove("hidden");
+    }
+
+    if (event.target.files[0]) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+</script>
+{% endblock %}

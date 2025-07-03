@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Photo Gallery{% endblock %}</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            secondary: '#9333ea',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans flex flex-col min-h-screen">
+
+  <!-- Navbar (if exists) -->
+  {% include 'partials/navbar.html' %}
+
+  <!-- Main content block -->
+  <main class="flex-grow max-w-5xl mx-auto p-4 w-full">
+    {% block content %}
+    <p class="text-center text-gray-500">No content found.</p>
+    {% endblock %}
+  </main>
+
+  <!-- Footer-->
+  {% include 'partials/footer.html' %}
+</body>
+</html>
