@@ -1,0 +1,2 @@
+# Ignore staticfiles in local development
+/staticfiles/
